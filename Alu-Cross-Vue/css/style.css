@@ -1,0 +1,11 @@
+/* .buttons{
+    float: left;
+} */
+
+.grid-border{
+    border: 1px solid black;
+}
+
+.cursor-pointer{
+    cursor: pointer;
+}

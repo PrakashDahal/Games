@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="../css/style.css">
+        <title>Vue test</title>
+    </head>
+
+    <body>
+        <div id="app">
+            <div class="container-fluid">
+                <div class="jumbotron mt-2">
+                    <h2>
+                        Hello! Friends.
+                    </h2>
+                    <p>
+                        Let's play Alu Cross game.
+                    </p>
+                </div>
+
+                <div class="container text-center mb-5" v-if="!isGameRunning">
+                    <h2>
+                        Enter players names:
+                    </h2>
+
+                    <input class="mr-2" type="text" v-model="players.firstPlayer" placeholder="First player">
+                    <input type="text" v-model="players.secondPlayer" placeholder="Second player">
+
+                    <div class=" mt-3">
+                        <button class="btn btn-info px-5" v-on:click="startGame"> Play </button>
+                    </div>
+
+                </div>
+
+                <div class="container w-25 m-auto" v-if="isGameRunning && !isGameOver">
+
+                    <h3 class="mb-3">
+                        {{currentPlayer=='p0' ? players.firstPlayer : players.secondPlayer}}'s turn.
+                    </h3>
+                    <div class="row">
+                        <div class="col-4 p-0 cursor-pointer" v-for="count in counts"
+                            v-on:click="selectGrid(currentPlayer, count)">
+                            <div
+                                class="grid-border text-center p-3 m-1 d-flex justify-content-center align-items-center">
+                                <h2 v-if="gamePlay.p0.includes(count)">
+                                    X
+                                </h2>
+
+                                <h2 v-if="gamePlay.p1.includes(count)">
+                                    O
+                                </h2>
+                                <h2 v-if="!gamePlay.p0.includes(count) && !gamePlay.p1.includes(count)">
+                                    &nbsp;
+                                </h2>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div v-if="isGameOver">
+                    <div class="row mb-3">
+                        <div class="col-6">
+                            <div class="d-flex flex-column justify-content-center bg-dark text-light m-1 p-3">
+                                <h3>Name: {{players.firstPlayer}}</h3>
+                                <h4>Scores: {{score[players.firstPlayer]}}</h4>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="d-flex flex-column justify-content-center bg-dark text-light m-1 p-3">
+                                <h3>Name: {{players.secondPlayer}}</h3>
+                                <h4>Scores: {{score[players.secondPlayer]}}</h4>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class=" mt-3">
+                        <button class="btn btn-info" v-on:click="replay">Replay</button>
+                        <button class="btn btn-warning" v-on:click="exitGame">Exit</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+
+        <!-- jQuery library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+        <!-- Popper JS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+        <!-- Latest compiled JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+        <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+        <script src="../js/main.js"></script>
+    </body>
+
+</html>
