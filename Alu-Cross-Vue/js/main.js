@@ -26,9 +26,11 @@ var app = new Vue({
         },
 
         selectGrid: function (player, gridNumber) {
-            this.gamePlay[player].push(gridNumber);
-            this.currentPlayer = this.changeCurrentPlayer();
-            this.checkWinner(player);
+            if (!(this.gamePlay['p0'].includes(gridNumber) || this.gamePlay['p1'].includes(gridNumber))) {
+                this.gamePlay[player].push(gridNumber);
+                this.currentPlayer = this.changeCurrentPlayer();
+                this.checkWinner(player);
+            }
 
         },
 
